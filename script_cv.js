@@ -20,7 +20,7 @@ const getUserProfile = async () => {
     `http://${backendIPAddress}/courseville/get_profile_info`,
     options
   )
-    .then((response) => response.json())
+    .then((res) => res.json())
     .then((data) => {
       console.log(data.user);
       document.getElementById(
