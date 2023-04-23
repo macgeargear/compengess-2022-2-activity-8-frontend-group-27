@@ -5,7 +5,7 @@ let itemsData;
 
 // TODO #2.1: Edit group number
 const getGroupNumber = () => {
-  return 27;
+  return 29;
 };
 
 // TODO #2.2: Show group members

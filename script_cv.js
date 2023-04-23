@@ -53,18 +53,20 @@ const createCompEngEssAssignmentTable = async () => {
   const table_body = document.getElementById("main-table-body");
   table_body.innerHTML = "";
   const cv_cid = document.getElementById("ces-cid-value").innerHTML;
+
   await fetch(
     `http://${backendIPAddress}/courseville/get_course_assignments/${cv_cid}`,
     { method: "GET", credentials: "include" }
   )
     .then((response) => response.json())
     .then(({ data }) => {
+      console.log("hello");
       data.map((assignment) => {
         table_body.innerHTML += `
-     <tr>
-       <td>${assignment.itemid}</td>
-       <td>${assignment.title}</td>
-</tr> `;
+          <tr>
+            <td>${assignment.itemid}</td>
+            <td>${assignment.title}</td>
+          </tr> `;
       });
     });
 };
@@ -74,3 +76,25 @@ const logout = async () => {
 };
 
 document.getElementById("group-id").innerHTML = getGroupNumber();
+
+async function getCourseList() {
+  const course_dropdown = document.getElementById("name-to-add");
+  course_dropdown.innerHTML =
+    "<option value='0'>-- Select Your Course --</option>";
+  const options = {
+    method: "GET",
+    credentials: "include",
+  };
+  await fetch(`http://${backendIPAddress}/courseville/get_courses`, options)
+    .then((response) => response.json())
+    .then((data) => {
+      data.map((course) => {
+        // ----------------- FILL IN YOUR CODE UNDER THIS AREA ONLY ----------------- //
+        course_dropdown.innerHTML += `<option value="${course.cv_cid}">${course.course_no}</option>`;
+        // ----------------- FILL IN YOUR CODE ABOVE THIS AREA ONLY ----------------- //
+      });
+    })
+    .catch((error) => console.error(error));
+}
+
+async;
